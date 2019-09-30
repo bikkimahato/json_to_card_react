@@ -16,27 +16,31 @@ const Flexi = ({ config, handleChange, onFlexiSubmit }) => {
   };
 
   const displayFields = el => {
+    let child = [];
     if (el.children) {
-      return getComponent(el.children.items);
-    } else {
-      if (el.type === "Card") {
-        return <Card props={el.props} />;
-      }
-      if (el.type === "Cards") {
-        return <Cards props={el.props} />;
-      }
-      if (el.type === "Header") {
-        return <Header props={el.props} />;
-      }
-      if (el.type === "TextField") {
-        return <TextField props={el.props} handleChange={handleChange} />;
-      }
-      if (el.type === "Button") {
-        return <Button props={el.props} onFlexiSubmit={onFlexiSubmit} />;
-      }
-      if (el.type === "RadioGroup") {
-        return <RadioGroup props={el.props} handleChange={handleChange} />;
-      }
+      child = getComponent(el.children.items);
+    }
+    // var fcomp = require(`../${el.type}`);
+    // console.log(fcomp);
+
+    // return <fcomp props={el.props} child={child} />;
+    if (el.type === "Card") {
+      return <Card props={el.props} child={child} />;
+    }
+    if (el.type === "Cards") {
+      return <Cards props={el.props} />;
+    }
+    if (el.type === "Header") {
+      return <Header props={el.props} />;
+    }
+    if (el.type === "TextField") {
+      return <TextField props={el.props} handleChange={handleChange} />;
+    }
+    if (el.type === "Button") {
+      return <Button props={el.props} onFlexiSubmit={onFlexiSubmit} />;
+    }
+    if (el.type === "RadioGroup") {
+      return <RadioGroup props={el.props} handleChange={handleChange} />;
     }
   };
 

@@ -1,13 +1,14 @@
 import React from "react";
 import Flexi from "../Flexi";
 import hoc from "../HocComponent";
+import registrationConfig from "./registrationConfig";
 
 class Registration extends React.Component {
   render() {
     return (
       <div>
         <Flexi
-          config={this.props.config.flexConfigForRegistration}
+          config={this.props.config}
           handleChange={this.props.handleChange}
           onFlexiSubmit={this.props.onFlexiSubmit}
         />
@@ -16,4 +17,4 @@ class Registration extends React.Component {
   }
 }
 
-export default hoc()(Registration);
+export default hoc(registrationConfig)(Registration);
