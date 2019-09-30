@@ -1,10 +1,4 @@
 import React from "react";
-import Header from "../Header/index";
-import TextField from "../TextField/index";
-import Card from "../Card";
-import Cards from "../Cards";
-import Button from "../Button";
-import RadioGroup from "../RadioGroup";
 
 const Flexi = ({ config, handleChange, onFlexiSubmit }) => {
   let cTypes = config.items;
@@ -20,30 +14,17 @@ const Flexi = ({ config, handleChange, onFlexiSubmit }) => {
     if (el.children) {
       child = getComponent(el.children.items);
     }
-    // var fcomp = require(`../${el.type}`);
-    // console.log(fcomp);
+    let Fcomp = require(`../${el.type}`).default;
 
-    // return <fcomp props={el.props} child={child} />;
-    if (el.type === "Card") {
-      return <Card props={el.props} child={child} />;
-    }
-    if (el.type === "Cards") {
-      return <Cards props={el.props} />;
-    }
-    if (el.type === "Header") {
-      return <Header props={el.props} />;
-    }
-    if (el.type === "TextField") {
-      return <TextField props={el.props} handleChange={handleChange} />;
-    }
-    if (el.type === "Button") {
-      return <Button props={el.props} onFlexiSubmit={onFlexiSubmit} />;
-    }
-    if (el.type === "RadioGroup") {
-      return <RadioGroup props={el.props} handleChange={handleChange} />;
-    }
+    return (
+      <Fcomp
+        props={el.props}
+        child={child}
+        handleChange={handleChange}
+        onFlexiSubmit={onFlexiSubmit}
+      />
+    );
   };
-
   return <div>{getComponent(cTypes)}</div>;
 };
 
