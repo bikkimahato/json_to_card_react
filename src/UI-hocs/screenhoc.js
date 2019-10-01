@@ -1,12 +1,27 @@
 import React from "react";
 
-const hoc = config => Component => {
-    console.log(config,'from hoc');
-    
+const hoc = () => Component => {
+
+
   class HocComponent extends React.Component {
     state = {
-      dataChange: {}
+      dataChange: {},
+      hasPath: false
     };
+    componentDidMount() {
+      this.pathChangeHandler()
+    }
+    pathChangeHandler = () => {
+      const { match } = this.props;
+      const { params } = match;
+
+      const receiveConifg = require(`../UI-Config/screen/specs/${params.path}`).default;
+
+      this.setState({
+        hasPath: true,
+        receiveConifg
+      })
+    }
 
     handleChange = (value, key) => {
       let { dataChange } = this.state;
@@ -26,12 +41,16 @@ const hoc = config => Component => {
       console.log(this.state.dataChange);
 
       return (
-        <Component
-          config={config}
-          handleChange={this.handleChange}
-          onFlexiSubmit={this.onFlexiSubmit}
-          {...this.props}
-        />
+        <div>
+          {this.state.hasPath ?
+            <Component
+              config={this.state.receiveConifg}
+              handleChange={this.handleChange}
+              onFlexiSubmit={this.onFlexiSubmit}
+              {...this.props}
+            /> : null
+          }
+        </div>
       );
     }
   }

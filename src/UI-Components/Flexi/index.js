@@ -2,7 +2,7 @@ import React from "react";
 
 const Flexi = ({ config, handleChange, onFlexiSubmit }) => {
   let cTypes = config.items;
-
+    
   const getComponent = cTypes => {
     return cTypes.map(el => {
       return displayFields(el);
