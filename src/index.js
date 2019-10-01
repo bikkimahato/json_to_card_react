@@ -1,19 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import "./styles.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import Registration from "./components/Registration";
-
+import Routes from './UI-Routers/Routes/main'
+import './styles.css'
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/registration" component={Registration} />
-        </Router>
+        <Routes />
       </div>
     );
   }
